@@ -1,0 +1,22 @@
+{
+  "name": "finance-app",
+  "version": "1.0.0",
+  "description": "FinSolutions, une entreprise innovante dans le secteur de la FinTech, souhaite développer une application web moderne de gestion de budget personnel. L'objectif est de permettre aux utilisateurs de suivre leurs dépenses, gérer leurs objectifs financiers et visualiser leurs données financières de manière interactive.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.0",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
