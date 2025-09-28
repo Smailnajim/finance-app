@@ -1,7 +1,12 @@
 const db = require('./../config/conection');
-const Budge = require('./Budge');
 
-class User extends db.Sequelize.Model{}
+// const models = require('./index');
+
+class User extends db.Sequelize.Model{
+    static associate(models) {
+        User.hasMany(models.Budge, {foreignKey: "userId", as: "budges"});
+    }
+}
 
 User.init({
     id:{
@@ -16,20 +21,20 @@ User.init({
         type: db.Sequelize.STRING
     },
     email: {
-        type: db.Sequelize.STRING,
+        type: db.Sequelize.STRING(300),
         unique: true
     },
     password: {
         type: db.Sequelize.STRING
     }},{
         sequelize: db.sequelize,
-        modelName: 'User'
+        modelName: 'User',
+        tableName: 'users'
     }
 );
+// User.associate = (models) => {
+    
+// }
 
-User.hasMany(Budge, {
-    forignKey: "user_id",
-    as: "budges"
-});
 
 module.exports = User;

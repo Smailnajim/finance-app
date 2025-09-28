@@ -1,7 +1,16 @@
 const db = require('./../config/conection');
-const User = require('./User');
+// const models = require('./index');
 
-class Budge extends db.Sequelize.Model{}
+class Budge extends db.Sequelize.Model{
+    static associate(models) {
+        console.log('imhrt =====', models)
+        Budge.belongsTo(models.User, {foreignKey: 'userId', as: 'user'});
+        Budge.belongsTo(models.Category, {foreignKey: 'categoryId', as: 'category'});
+        Budge.hasMany(models.Transaction, {foreignKey: 'budgeId', as: 'transactions'});
+        console.log('================firte ====');
+
+    }
+}
 
 Budge.init({
     id: {
@@ -19,9 +28,9 @@ Budge.init({
         type: db.Sequelize.BOOLEAN,
     }},{
     sequelize: db.sequelize,
-    modelName: 'Budge'
+    modelName: 'Budge',
+    tableName: 'budges'
 });
-
 
 
 

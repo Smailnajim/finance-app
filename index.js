@@ -4,31 +4,30 @@ const PORT = 3000;
 const db = require('./config/conection');
 const User = require('./models/User');
 const Budge = require('./models/Budge');
-const { FORCE } = require('sequelize/lib/index-hints');
-
 
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+
+
 db.sequelize.authenticate()
-.then(() => console.log('Connexion MySQL réussie'))
-.catch(err => console.error(' Erreur connexion:', err));
-
-
-User.sync({alter: true})
-.then(() => { console.log('creating user tables is Done')})
-.catch(err => {console.log(err, 'User errrrrrrrrrrrrrror')});
-
-Budge.sync({alter: true})
-.then(() => { console.log('budge tables is Done')})
-.catch(err => {console.log(err, 'Budge errrrrrrrrrrrrrror')});
+.then(() => {
+  console.log('Connexion MySQL is good');
+  return db.sequelize.sync({alter: true});
+})
+.then(() => { 
+  console.log('==========================')
+  console.log('create all tables is Done');
+})
+.catch(err => {console.log(err, '<--- ERROR')});
 
 
 
 
-app.post('/', function(req, res){
+app.get('/', function(req, res){
   res.status(200).send(arr1);
+  return;
 });
 
 
