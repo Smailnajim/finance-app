@@ -1,8 +1,9 @@
 const { Sequelize } = require('sequelize');
+const params = require('./params');
 
-const sequelize = new Sequelize('finance-app', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql'
+const sequelize = new Sequelize(params.dataBase, params.name, params.code, {
+    host: params.host,
+    dialect: params.dialect
 });
 
 const db = {};
