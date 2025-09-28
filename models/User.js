@@ -14,15 +14,15 @@ User.init({
         primaryKey: true,
         autoIncrement: true
     },
-    firsName: {
+    firstName: {
         type: db.Sequelize.STRING
     },
     lastName: {
         type: db.Sequelize.STRING
     },
     email: {
-        type: db.Sequelize.STRING(300),
-        unique: true
+        type: db.Sequelize.STRING,
+        unique: true,
     },
     password: {
         type: db.Sequelize.STRING
