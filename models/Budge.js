@@ -18,6 +18,22 @@ Budge.init({
         primaryKey: true,
         autoIncrement: true
     },
+    userId: {
+        type: db.Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Users',
+            key: 'id'
+        }
+    },
+    categoryId: {
+        type: db.Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'categories',
+            key: 'id',
+        }
+    },
     mothly: {
         type: db.Sequelize.FLOAT,
     },

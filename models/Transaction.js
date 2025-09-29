@@ -1,6 +1,5 @@
 const db = require('./../config/conection');
 
-// const models = require('./index');
 
 class Transaction extends db.Sequelize.Model{
     static associate(models) {
@@ -13,6 +12,14 @@ Transaction.init({
         type: db.Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
+    },
+    budgeId: {
+        type: db.Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Budges',
+            key: 'id'
+        }
     },
     budgeTransation: {
         type: db.Sequelize.FLOAT,

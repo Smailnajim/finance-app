@@ -1,10 +1,10 @@
 const db = require('./../config/conection');
 
-// const models = require('./index');
 
 class User extends db.Sequelize.Model{
     static associate(models) {
         User.hasMany(models.Budge, {foreignKey: "userId", as: "budges"});
+        User.belongsTo(models.Role, {foreignKey: 'roleId', as: 'role'});
     }
 }
 
@@ -32,9 +32,7 @@ User.init({
         tableName: 'users'
     }
 );
-// User.associate = (models) => {
-    
-// }
+
 
 
 module.exports = User;

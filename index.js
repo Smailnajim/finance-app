@@ -3,8 +3,6 @@ const app = express();
 const PORT = 3000;
 const path = require('path');
 const db = require('./config/conection');
-const User = require('./models/User');
-const Budge = require('./models/Budge');
 const userC = require('./controllers/userController');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -26,13 +24,14 @@ app.set('views', path.join(__dirname, 'views'));
 db.sequelize.authenticate()
 .then(() => {
   console.log('Connexion MySQL is good');
-  return db.sequelize.sync({alter: true});
+  return db.sequelize.sync({ alter: true});
 })
 .then(() => {
   console.log('==========================');
   console.log('create all tables is Done');
 })
 .catch(err => {console.log(err.parent, '<--- ERROR')});
+
 
 
 app.get('/home',isAuth, function(req, res){
@@ -57,8 +56,6 @@ app.post('/register', function(req, res){
 app.get('/logout', function(req, res){
   userC.logout(req, res);
 });
-
-
 
 
 app.listen(PORT, ()=>{
