@@ -8,6 +8,7 @@ const Budge = require('./models/Budge');
 const userC = require('./controllers/userController');
 const session = require('express-session');
 const flash = require('connect-flash');
+const isAuth = require('./middleware/isAuth');
 
 app.use(session({
     secret: 'KEY200#',
@@ -34,7 +35,7 @@ db.sequelize.authenticate()
 .catch(err => {console.log(err.parent, '<--- ERROR')});
 
 
-app.get('/home', function(req, res){
+app.get('/home',isAuth, function(req, res){
   userC.renderHome(req, res);
 });
 
