@@ -6,6 +6,15 @@ const db = require('./config/conection');
 const User = require('./models/User');
 const Budge = require('./models/Budge');
 const userC = require('./controllers/userController');
+const session = require('express-session');
+const flash = require('connect-flash');
+
+app.use(session({
+    secret: 'KEY200#',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } 
+}));
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -25,8 +34,14 @@ db.sequelize.authenticate()
 .catch(err => {console.log(err.parent, '<--- ERROR')});
 
 
+app.get('/home', function(req, res){
+  userC.renderHome(req, res);
+});
 
 app.get('/login', function(req, res){
+  return userC.renderLogin(req, res);
+});
+app.post('/login', function(req, res){
   return userC.login(req, res);
 });
 
@@ -38,6 +53,9 @@ app.post('/register', function(req, res){
   console.log(user);
 });
 
+app.get('/logout', function(req, res){
+  userC.logout(req, res);
+});
 
 
 
