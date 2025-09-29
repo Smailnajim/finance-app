@@ -1,6 +1,12 @@
 const User = require('./../models/User');
 const session = require('express-session');
 
+
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+
 exports.renderHome = (req, res) => {
     console.log(req.session.user, '=======----');
     res.render('home', {session: req.session});
@@ -26,8 +32,20 @@ exports.create = async (req, res) => {
             req.flash({"message": "Email exist"});
             return res.redirect('/register');
         }
-        const user = await User.create(req.body);
-        return res.redirect('/login');
+        console.log(req.body.password, '1<====');
+        new Promise((resolve, reject)=>{
+            bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+                if (err) reject(err)
+                resolve(hash)
+            });
+        }).then((res) => {
+            console.log(req.body.password, '2<====');
+            req.body.password = res;
+            return User.create(req.body);
+        }).then((res) => {
+            return res.redirect('/login');
+        }).catch((error)=>console.error('=====>', error, '<===='));
+        
     }catch (error){
         return error;
     }
