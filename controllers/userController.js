@@ -83,11 +83,19 @@ exports.login = async (req, res) => {
             }
         });
         if(!user || !(user.password == req.body.password)){
-            req.flash('message', 'email or password falte');
-            return res.redirect('/login');
+            // Load hash from your password DB.
+            bcrypt.compare(req.body.password, user.password, function(err, result) {
+                if (result){
+                    req.session.user = user;
+                    // return this.renderHome(req, res);
+                    res.render('home', {session: req.session});
+                    return;
+                }else{
+                    req.flash('message', 'email or password falte');
+                    return res.redirect('/login');
+                }
+            });
         }
-        req.session.user = user;
-        return this.renderHome(req, res);
     }catch (error){
         console.error('== == == == == == == == == ==', error);
     }
