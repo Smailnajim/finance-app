@@ -1,4 +1,5 @@
 const db = require('./../config/conection');
+const status = require('./../enum/status');
 // const models = require('./index');
 
 class Budge extends db.Sequelize.Model{
@@ -41,7 +42,7 @@ Budge.init({
         type: db.Sequelize.FLOAT,
     },
     status: {
-        type: db.Sequelize.BOOLEAN,
+        type: db.Sequelize.ENUM([...status]),
     }},{
     sequelize: db.sequelize,
     modelName: 'Budge',

@@ -3,6 +3,8 @@ const session = require('express-session');
 
 
 const bcrypt = require('bcrypt');
+const Budge = require('../models/Budge');
+const Category = require('../models/Category');
 const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
@@ -14,6 +16,7 @@ exports.renderHome = (req, res) => {
 
 exports.register = (req, res) => {
     res.render('register');
+    return;
 }
 
 
@@ -38,14 +41,34 @@ exports.create = async (req, res) => {
                 if (err) reject(err)
                 resolve(hash)
             });
-        }).then((res) => {
-            console.log(req.body.password, '2<====');
-            req.body.password = res;
+        }).then((hash) => {
+            console.log(req.body, '2<====');  //create user
+            req.body.password = hash;
             return User.create(req.body);
-        }).then((res) => {
-            return res.redirect('/login');
-        }).catch((error)=>console.error('=====>', error, '<===='));
-        
+        }).then((user)=>{
+            console.log('=-=-=-> --- --- ---', user);
+            return new Promise(async (resolve, reject)=>{  //create wallet category or get it
+                let category = await Category.findOne({where:{ name: 'wallet'}});
+                if(category){
+                    console.log("==--=>", user);
+                }
+                else{
+                    console.log("==--=> not find");
+                    category = await Category.create({ name: 'wallet'});
+                }
+                resolve({category, user});
+            });
+        }).then((res)=>{               //create Budge 
+            // console.log('=-=-=-> --- --- ---', res.category, res.user);
+            const budge = Budge.create({
+                userId:  res.user.id,
+                categoryId: res.category.id,
+                mothly: null,
+                rest: 0,
+                status: 'active'
+            });
+        }).catch((error)=>console.error('=====>', error, '<====<=<=<=<=<'));
+        return res.redirect('/login');
     }catch (error){
         return error;
     }
@@ -54,7 +77,6 @@ exports.create = async (req, res) => {
 exports.login = async (req, res) => {
     const { email: mail } = req.body;
     try{
-        console.log('ee');
         const user = await User.findOne({
             where: {
                 email: mail,

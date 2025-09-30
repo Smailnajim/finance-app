@@ -7,6 +7,7 @@ const userC = require('./controllers/userController');
 const session = require('express-session');
 const flash = require('connect-flash');
 const isAuth = require('./middleware/isAuth');
+const Transaction = require('./models/Transaction');
 
 app.use(session({
     secret: 'KEY200#',
@@ -15,6 +16,7 @@ app.use(session({
     cookie: { secure: false } 
 }));
 
+
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
@@ -22,16 +24,15 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 db.sequelize.authenticate()
-.then(() => {
+.then( () => {
   console.log('Connexion MySQL is good');
-  return db.sequelize.sync({ alter: true});
+  return  db.sequelize.sync({ alter: true });
 })
 .then(() => {
   console.log('==========================');
   console.log('create all tables is Done');
 })
 .catch(err => {console.log(err.parent, '<--- ERROR')});
-
 
 
 app.get('/home',isAuth, function(req, res){

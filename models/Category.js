@@ -15,7 +15,8 @@ Category.init({
         autoIncrement: true
     },
     name: {
-        type: db.Sequelize.STRING
+        type: db.Sequelize.STRING,
+        unique: true,
     }},
     {
         sequelize: db.sequelize,

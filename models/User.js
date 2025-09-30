@@ -4,7 +4,6 @@ const db = require('./../config/conection');
 class User extends db.Sequelize.Model{
     static associate(models) {
         User.hasMany(models.Budge, {foreignKey: "userId", as: "budges"});
-        User.belongsTo(models.Role, {foreignKey: 'roleId', as: 'role'});
     }
 }
 
