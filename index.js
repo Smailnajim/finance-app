@@ -9,7 +9,7 @@ const flash = require('connect-flash');
 const isAuth = require('./middleware/isAuth');
 const Transaction = require('./models/Transaction');
 const cookieParser = require('cookie-parser');
-
+const routes = require('./routes/web');
 
 app.use(session({
     secret: 'KEY200#',
@@ -26,7 +26,7 @@ app.use(session({
 }));
 app.use(flash());
 
-
+app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
@@ -44,29 +44,7 @@ db.sequelize.authenticate()
 })
 .catch(err => {console.log(err.parent, '<--- ERROR')});
 
-
-app.get('/home', function(req, res){
-  userC.renderHome(req, res);
-});
-
-app.get('/login', function(req, res){
-  return userC.renderLogin(req, res);
-});
-app.post('/login', function(req, res){
-  return userC.login(req, res);
-});
-
-app.get('/register', function(req, res){
-  return userC.register(req, res);
-});
-app.post('/register', function(req, res){
-  const user = userC.create(req, res);
-  console.log(user);
-});
-
-app.get('/logout', function(req, res){
-  userC.logout(req, res);
-});
+app.use('/', routes);
 
 app.listen(PORT, ()=>{
   console.log(`Server running on http://localhost:{PORT}`);

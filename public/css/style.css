@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{ 
+    width: 100vw;
+    height: 100vh;
+}
+
+ul{
+    list-style: none;
+}
+
+header{
+    width: 100%;
+    height: 40vh;
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+nav{
+    background-color: white;
+}
+
+#listBar{
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+
+    padding: 20px;
+}
+
+.listItem{
+    padding: 12.5px;
+    border-radius: 6px;
+}
+
+.listItem a{
+    text-decoration: none;
+    color: black;
+}
+
+#conect{
+    background-color: #1090CB;
+}
+
+#conect:hover{
+    background-color: #04b0ff;
+}
+
+.walet{
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.walet .budge{
+    transform: translateY(50%);
+    background-color: aquamarine;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+#lastThreeTransaction{
+    width: fit-content;
+    position: relative;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#listTransaction{
+    width: fit-content;
+    padding: 10px;
+    background-color: cadetblue;
+
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    gap: 10px;
+}
+
+#listTransaction .transactionItem{
+
+}

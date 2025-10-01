@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
-    <link rel="stylesheet" href="./../public/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
         <nav>
-            <ul>
-                <li>Home</li>
-                <li>Transaction</li>
-                <li>Budgetiation</li>
-                <li>visilisation</li>
-                <% if(session.user){ %>
-                    <li>conect</li>
+            <ul id="listBar">
+                <li id="home" class="listItem"><a href="home">Home</a></li>
+                <li id="transaction" class="listItem"><a href="transaction">Transaction</a></li>
+                <li id="budgetiation" class="listItem"><a href="budgetiation">Budgetiation</a></li>
+                <li id="visilisation" class="listItem"><a href="visilisation">Visilisation</a></li>
+                <% if(!session.user){ %>
+                    <li id="conect" class="listItem"><a href="register">Conect</a></li>
                 <% } %>
             </ul>
         </nav>
@@ -23,10 +23,17 @@
             <div class="budge">000.0 Dh</div>
         </div>
     </header>
-    <h1>home</h1> 
+    
     <% if(session.user){ %>
-    <h2>hello <%=  session.user.firstName %></h2>
+    <h2>hello <%=  session.user.firstName %>!</h2>
     <% } %>
-    <h2>hello Guse</h2>
+    <section id="lastThreeTransaction">
+        <h3>Transaction</h3>
+        <ul id="listTransaction">
+            <li class="transactionItem">1111111111111111111111111</li>
+            <li class="transactionItem">2222222222222222222222222</li>
+            <li class="transactionItem">3333333333333333333333333</li>
+        </ul>
+    </section>
 </body>
 </html>

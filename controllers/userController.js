@@ -10,7 +10,6 @@ const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
 
 exports.renderHome = (req, res) => {
-    console.log(req.session.user, '=======----');
     res.render('home', {session: req.session});
 }
 
