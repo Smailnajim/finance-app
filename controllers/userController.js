@@ -15,7 +15,8 @@ exports.renderHome = (req, res) => {
 }
 
 exports.register = (req, res) => {
-    res.render('register',  {message: false});
+    const message = req.flash('message');
+    res.render('register',  {message});
     return;
 }
 

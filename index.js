@@ -45,7 +45,7 @@ db.sequelize.authenticate()
 .catch(err => {console.log(err.parent, '<--- ERROR')});
 
 
-app.get('/home',isAuth, function(req, res){
+app.get('/home', function(req, res){
   userC.renderHome(req, res);
 });
 

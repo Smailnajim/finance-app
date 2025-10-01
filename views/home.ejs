@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="./../public/css/style.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>Transaction</li>
+                <li>Budgetiation</li>
+                <li>visilisation</li>
+                <% if(session.user){ %>
+                    <li>conect</li>
+                <% } %>
+            </ul>
+        </nav>
+        <div class="walet">
+            <div class="budge">000.0 Dh</div>
+        </div>
+    </header>
     <h1>home</h1> 
     <% if(session.user){ %>
     <h2>hello <%=  session.user.firstName %></h2>
