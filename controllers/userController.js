@@ -1,6 +1,6 @@
 const User = require('./../models/User');
 const session = require('express-session');
-
+const flash = require('connect-flash');
 
 const bcrypt = require('bcrypt');
 const Budge = require('../models/Budge');
@@ -15,7 +15,7 @@ exports.renderHome = (req, res) => {
 }
 
 exports.register = (req, res) => {
-    res.render('register');
+    res.render('register',  {message: false});
     return;
 }
 
@@ -28,12 +28,16 @@ exports.create = async (req, res) => {
     try{
         console.log(req.session.user, '========= iam creating user =======');
         const { email: mail } = req.body;
-        console.log('=========  =======', mail);
+        console.log('mail =========  =======', mail);
         const isExiste = await User.findOne({ where: { email: mail } });
-        console.log('=========  =======', isExiste);
+        console.log('=========  user =======', isExiste);
+
         if(isExiste){
-            req.flash({"message": "Email exist"});
-            return res.redirect('/register');
+            console.log('88');
+            req.flash("message", "Email exist");
+            console.log('7 e');
+            res.redirect('/register');
+            return;
         }
         console.log(req.body.password, '1<====');
         new Promise((resolve, reject)=>{

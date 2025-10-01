@@ -8,6 +8,8 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const isAuth = require('./middleware/isAuth');
 const Transaction = require('./models/Transaction');
+const cookieParser = require('cookie-parser');
+
 
 app.use(session({
     secret: 'KEY200#',
@@ -15,6 +17,14 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false } 
 }));
+app.use(cookieParser('keyboard cat'));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 180000 }
+}));
+app.use(flash());
 
 
 app.use(express.urlencoded({extended: true}));
@@ -26,7 +36,7 @@ app.set('views', path.join(__dirname, 'views'));
 db.sequelize.authenticate()
 .then( () => {
   console.log('Connexion MySQL is good');
-  return  db.sequelize.sync({ alter: true });
+  return db.sequelize.sync({ alter: true });
 })
 .then(() => {
   console.log('==========================');
@@ -57,7 +67,6 @@ app.post('/register', function(req, res){
 app.get('/logout', function(req, res){
   userC.logout(req, res);
 });
-
 
 app.listen(PORT, ()=>{
   console.log(`Server running on http://localhost:{PORT}`);

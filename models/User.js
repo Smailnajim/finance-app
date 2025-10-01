@@ -21,6 +21,7 @@ User.init({
     },
     email: {
         type: db.Sequelize.STRING,
+        allowNull: false,
         unique: true,
     },
     password: {

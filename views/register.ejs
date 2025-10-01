@@ -12,6 +12,9 @@
         <input type="email" name="email" placeholder="email" required>
         <input type="password" name="password" placeholder="password">
         <button type="submit">Register</button>
+        <% if(message){ %>
+            <h1><%= message %></h1>
+        <% } %>
     </form>
 </body>
 </html>
