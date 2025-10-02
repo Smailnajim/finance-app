@@ -15,6 +15,7 @@
                     <li id="transaction" class="listItem"><a href="transaction">Transaction</a></li>
                     <li id="budgetiation" class="listItem"><a href="budgetiation">Budgetiation</a></li>
                     <li id="visilisation" class="listItem"><a href="visilisation">Visilisation</a></li>
+                    <li id="conect" class="listItem"><a href="logout">LOGOUT</a></li>
                 <% }else{ %>
                     <li id="transaction" class="listItem"><a href="transaction">Transaction</a></li>
                     <li id="budgetiation" class="listItem"><a href="budgetiation">Budgetiation</a></li>
@@ -28,9 +29,7 @@
         </div>
     </header>
     
-    <% if(session.user){ %>
-    <h2>hello <%=  session.user.firstName %>!</h2>
-    <% } %>
+    
     <section id="lastThreeTransaction">
         <h3>Transaction</h3>
         <ul id="listTransaction">
@@ -39,5 +38,8 @@
             <li class="transactionItem">3333333333333333333333333</li>
         </ul>
     </section>
+    <% if(session.user){ %>
+    <h2>hello <%=  session.user.firstName %>!</h2>
+    <% } %>
 </body>
 </html>

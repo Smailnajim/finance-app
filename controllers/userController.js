@@ -10,6 +10,7 @@ const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
 
 exports.renderHome = (req, res) => {
+    console.log('session ========= user =', req.session.user);
     return res.render('home', {session: req.session});
 }
 
@@ -50,7 +51,9 @@ exports.create = async (req, res) => {
             req.body.password = hash;
             return User.create(req.body);
         }).then((user)=>{
-            console.log('=-=-=-> --- --- ---', user);
+            console.log("session =====--=>", user);
+            req.session.user = user;
+            console.log('session ========= user =', req.session.user);
             return new Promise(async (resolve, reject)=>{  //create wallet category or get it
                 let category = await Category.findOne({where:{ name: 'wallet'}});
                 if(category){
@@ -71,8 +74,10 @@ exports.create = async (req, res) => {
                 rest: 0,
                 status: 'active'
             });
-        }).catch((error)=>console.error('=====>', error, '<====<=<=<=<=<'));
-        return res.redirect('/login');
+        }).then(()=>{
+            console.log('____________----_______');
+            return res.redirect('/home');
+        }).catch((error)=>console.error('errrorrooooo=====>', error, '<====<=<=<=<=<'));
     }catch (error){
         return error;
     }
