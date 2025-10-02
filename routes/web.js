@@ -3,34 +3,34 @@ const router = express.Router();
 
 
 
-const userC = require('./../controllers/userController');
-
+const userController = require('./../controllers/userController');
+const transactionController = require('./../controllers/transactionController');
 
 router.get("/login", function (req, res) {
-    return userC.renderLogin(req, res);
+    return userController.renderLogin(req, res);
 });
 router.post("/login", function (req, res) {
-    return userC.login(req, res);
+    return userController.login(req, res);
 });
 
 router.get("/register", function (req, res) {
-    return userC.register(req, res);
+    return userController.register(req, res);
 });
 router.post("/register", function (req, res) {
-    const user = userC.create(req, res);
+    const user = userController.create(req, res);
     console.log(user);
 });
 
 router.get("/logout", function (req, res) {
-    userC.logout(req, res);
+    userController.logout(req, res);
 });
 
 router.get("/home", function (req, res) {
-    userC.renderHome(req, res);
+    userController.renderHome(req, res);
 });
 
-router.get("/home", function (req, res) {
-    userC.renderHome(req, res);
+router.get("/transaction", function (req, res) {
+    transactionController.renderTransaction(req, res);
 });
 
 module.exports = router;
