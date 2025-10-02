@@ -10,18 +10,18 @@ const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
 
 exports.renderHome = (req, res) => {
-    res.render('home', {session: req.session});
+    return res.render('home', {session: req.session});
 }
 
 exports.register = (req, res) => {
     const message = req.flash('message');
-    res.render('register',  {message});
-    return;
+    return res.render('register',  {message});
 }
 
 
 exports.renderLogin = (req, res) => {
-    res.render('login');
+    let message = req.flash('message');
+    return res.render('login', {message});
 }
 
 exports.create = async (req, res) => {
