@@ -15,7 +15,7 @@ ul{
 header{
     width: 100%;
     height: 40vh;
-    background-color: aqua;
+    background-color: #A4E2FF;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -64,3 +64,18 @@ nav{
     padding: 10px;
     border-radius: 7px;
 }
+
+
+.choseBudge{
+    background-color: #F5F5F5;
+    width: 50%;
+    padding: 15px;
+
+    display: flex;
+    justify-content: space-between;
+    margin: 5% auto;
+}
+.choseBudge #selectBudge{
+    width: 10%;
+}
+
