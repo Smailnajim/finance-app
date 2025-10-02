@@ -55,6 +55,7 @@ nav{
     width: 90%;
     display: flex;
     justify-content: flex-end;
+    /* background-color: cadetblue; */
 }
 
 .walet .budge{
@@ -62,6 +63,7 @@ nav{
     background-color: aquamarine;
     width: fit-content;
     padding: 10px;
+    border: #A4E2FF solid 2.5px;
     border-radius: 7px;
 }
 
