@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 
-
+const isAuth = require('./../middleware/isAuth');
 const userController = require('./../controllers/userController');
 const transactionController = require('./../controllers/transactionController');
 
@@ -29,7 +29,7 @@ router.get("/home", function (req, res) {
     userController.renderHome(req, res);
 });
 
-router.get("/transaction", function (req, res) {
+router.get("/transaction", isAuth, function (req, res) {
     transactionController.renderTransaction(req, res);
 });
 

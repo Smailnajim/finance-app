@@ -11,10 +11,14 @@
         <nav>
             <ul id="listBar">
                 <li id="home" class="listItem"><a href="home">Home</a></li>
-                <li id="transaction" class="listItem"><a href="transaction">Transaction</a></li>
-                <li id="budgetiation" class="listItem"><a href="budgetiation">Budgetiation</a></li>
-                <li id="visilisation" class="listItem"><a href="visilisation">Visilisation</a></li>
-                <% if(!session.user){ %>
+                <% if(session.user){ %>
+                    <li id="transaction" class="listItem"><a href="transaction">Transaction</a></li>
+                    <li id="budgetiation" class="listItem"><a href="budgetiation">Budgetiation</a></li>
+                    <li id="visilisation" class="listItem"><a href="visilisation">Visilisation</a></li>
+                <% }else{ %>
+                    <li id="transaction" class="listItem"><a href="transaction">Transaction</a></li>
+                    <li id="budgetiation" class="listItem"><a href="budgetiation">Budgetiation</a></li>
+                    <li id="visilisation" class="listItem"><a href="visilisation">Visilisation</a></li>
                     <li id="conect" class="listItem"><a href="register">Conect</a></li>
                 <% } %>
             </ul>
