@@ -25,7 +25,7 @@
             </ul>
         </nav>
         <div class="walet">
-            <div class="budge">000.0 Dh</div>
+            <div class="budge"><%= wallet %> Dh</div>
         </div>
     </header>
     
@@ -38,8 +38,5 @@
             <li class="transactionItem">3333333333333333333333333</li>
         </ul>
     </section>
-    <% if(session.user){ %>
-    <h2>hello <%=  session.user.firstName %>!</h2>
-    <% } %>
 </body>
 </html>

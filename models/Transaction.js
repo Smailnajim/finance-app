@@ -1,9 +1,10 @@
+const status = require('../enum/status');
 const db = require('./../config/conection');
 
 
 class Transaction extends db.Sequelize.Model{
     static associate(models) {
-        Transaction.belongsTo(models.Budge, {foreignKey: 'budgeId', as: 'budges'});
+        Transaction.belongsTo(models.Budge, {foreignKey: 'budgeId'/*, as: 'budges'*/});
     }
 }
 

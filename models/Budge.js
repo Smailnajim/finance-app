@@ -1,6 +1,5 @@
 const db = require('./../config/conection');
 const status = require('./../enum/status');
-// const models = require('./index');
 
 class Budge extends db.Sequelize.Model{
     static associate(models) {
@@ -9,7 +8,6 @@ class Budge extends db.Sequelize.Model{
         Budge.belongsTo(models.Category, {foreignKey: 'categoryId', as: 'category'});
         Budge.hasMany(models.Transaction, {foreignKey: 'budgeId', as: 'transactions'});
         console.log('================firte ====');
-
     }
 }
 
@@ -23,7 +21,7 @@ Budge.init({
         type: db.Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'Users',
+            model: 'users',
             key: 'id'
         }
     },
@@ -35,7 +33,7 @@ Budge.init({
             key: 'id',
         }
     },
-    mothly: {
+    monthly: {
         type: db.Sequelize.FLOAT,
     },
     rest: {
@@ -48,7 +46,6 @@ Budge.init({
     modelName: 'Budge',
     tableName: 'budges'
 });
-
 
 
 module.exports = Budge;

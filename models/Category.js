@@ -1,6 +1,5 @@
 const db = require('./../config/conection');
 
-// const models = require('./index');
 
 class Category extends db.Sequelize.Model{
     static associate(models) {
@@ -24,10 +23,6 @@ Category.init({
         tableName: 'categories'
     }
 );
-
-// Category.associate = (models) => {
-    
-// }
 
 
 module.exports = Category;

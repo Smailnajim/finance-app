@@ -1,4 +1,4 @@
-const User = require('./../models/User');
+const { User } = require('./../models');
 const session = require('express-session');
 const flash = require('connect-flash');
 
@@ -9,9 +9,34 @@ const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
 
-exports.renderHome = (req, res) => {
-    console.log('session ========= user =', req.session.user);
-    return res.render('home', {session: req.session});
+exports.renderHome = async (req, res) => {
+    if(!req.session.user){
+        res.redirect('/register');
+        return;
+    }
+    try{
+        const budge = await Budge.findOne({
+            where: {
+                userId: req.session.user.id
+            },
+            attributes: [ 'rest' ],
+            include: [{
+                model: Category,
+                as: 'category',
+                where: {
+                    name: 'wallet',
+                }
+            }]
+        });
+        console.log('user--->', budge.rest);
+        console.log('-------------------------------------');
+        
+        return res.render('home', {session: req.session, wallet: budge.rest});
+    }catch(error){
+        console.log('*************************************');
+        console.log('homer --->',error);
+    }
+    
 }
 
 exports.register = (req, res) => {
