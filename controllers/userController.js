@@ -1,4 +1,5 @@
-const { User } = require('./../models');
+const models = require('./../models');
+const User  = require('./../models/User');
 const session = require('express-session');
 const flash = require('connect-flash');
 
@@ -9,15 +10,11 @@ const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
 
-exports.renderHome = async (req, res) => {
-    if(!req.session.user){
-        res.redirect('/register');
-        return;
-    }
+exports.budgeOfThisUser = async (req, res) => {
     try{
         const budge = await Budge.findOne({
             where: {
-                userId: req.session.user.id
+                userId: 1 /*req.session.user.id*/
             },
             attributes: [ 'rest' ],
             include: [{
@@ -30,13 +27,53 @@ exports.renderHome = async (req, res) => {
         });
         console.log('user--->', budge.rest);
         console.log('-------------------------------------');
+        console.log('+++++++++++++++++++++++++++++++++++++');
         
-        return res.render('home', {session: req.session, wallet: budge.rest});
+        return budge.rest;
     }catch(error){
         console.log('*************************************');
         console.log('homer --->',error);
+        return;
     }
-    
+}
+
+const lastThreeTransaction = async (req, res) => {
+    try{
+        const three = await models.Transaction.findAll({
+            include: [{
+                model: models.Budge,
+                as: 'budge',
+                where: {userId: 1/*req.session.user.id*/},
+                attributes: []
+            }],
+            order: [['createdAt', 'DESC']],
+            limit: 3,
+        });
+        console.log(three);
+        console.log('three====');
+        return three;
+    }catch(error){
+        console.log('="="="=',error);
+    }
+}
+
+
+
+exports.renderHome =  async (req, res) => {
+    /*if(!req.session.user){
+        res.redirect('/register');
+        return;
+    }*/
+    try{
+        let three = await lastThreeTransaction(req, res);
+        const wallet = await this.budgeOfThisUser(req, res);
+        console.log('*************************************');
+        three.push({budgeTransation : '1', explain : '2', budgeId: '3'});
+        console.log(three);
+        console.log('three====2');
+        return res.render('home', {session: req.session, wallet, three});
+    }catch(error){
+    }
 }
 
 exports.register = (req, res) => {

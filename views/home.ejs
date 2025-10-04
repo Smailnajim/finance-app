@@ -33,6 +33,11 @@
     <section id="lastThreeTransaction">
         <h3>Transaction</h3>
         <ul id="listTransaction">
+            <% if(three){ %>
+                <% three.forEach((one)=>{ %>
+                    <li class="transactionItem"><%= one.budgeTransation  %><%= one.explain  %><%= one.budgeId  %> </li>
+                <% }) %>
+            <% } %>
             <li class="transactionItem">1111111111111111111111111</li>
             <li class="transactionItem">2222222222222222222222222</li>
             <li class="transactionItem">3333333333333333333333333</li>

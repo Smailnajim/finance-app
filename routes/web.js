@@ -29,7 +29,7 @@ router.get("/home", function (req, res) {
     userController.renderHome(req, res);
 });
 
-router.get("/transaction", isAuth, function (req, res) {
+router.get("/transaction", /*isAuth,*/ function (req, res) {
     transactionController.renderTransaction(req, res);
 });
 

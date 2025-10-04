@@ -1,5 +1,5 @@
-const Budge = require('./../models/Budge');
+const models = require('./../models');
 
-exports.create = () => {
+exports.create = (req, res) => {
     
 }
