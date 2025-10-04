@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>budge</title>
+    <link rel="stylesheet" href="css/budgeStyle.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul id="listBar">
+                <li id="home" class="listItem"><a href="home">Home</a></li>
+                <% if(session.user){ %>
+                    <li id="transaction" class="listItem"><a href="transaction">Transaction</a></li>
+                    <li id="budgetiation" class="listItem"><a href="budgetiation">Budgetiation</a></li>
+                    <li id="visilisation" class="listItem"><a href="visilisation">Visilisation</a></li>
+                    <li id="conect" class="listItem"><a href="logout">LOGOUT</a></li>
+                <% }else{ %>
+                    <li id="transaction" class="listItem"><a href="transaction">Transaction</a></li>
+                    <li id="budgetiation" class="listItem"><a href="budgetiation">Budgetiation</a></li>
+                    <li id="visilisation" class="listItem"><a href="visilisation">Visilisation</a></li>
+                    <li id="conect" class="listItem"><a href="register">Conect</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="continer">
+        <form action="create-category" method="post" class="category">
+            <input type="text" name="category" placeholder="category" id="category" required>
+            <select id="selectCategory">
+                <% categories.forEach((category)=>{%>
+                    <option value=<%= category.name %>><%= category.name %></option>
+                <% })%>
+            </select>
+            <button type="submit">Create Budge</button>
+        </form>
+    </div>
+    <script src="js/budgeScript.js"></script>
+</body>
+</html>

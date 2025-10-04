@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const session = require('express-session');
 
 const isAuth = require('./../middleware/isAuth');
 const userController = require('./../controllers/userController');
@@ -36,6 +36,10 @@ router.get("/transaction", /*isAuth,*/ function (req, res) {
 
 router.get('/create-category', function(req, res){
     categoryController.create(req, res);
+});
+
+router.get('/budge', function(req, res){
+    categoryController.renderBudge(req, res);
 });
 
 module.exports = router;

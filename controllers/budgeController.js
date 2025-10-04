@@ -30,3 +30,12 @@ exports.insertIntoWallet = async (req, res) => {
     req.locals.name = 'walet';
     return await this.inserIntoBudge(req, res);
 }
+
+exports.create = (req, res) => {
+    //req.body.category bach nmizo bin budge w alakhor 
+    // req.session.user.id budge dyalmen 
+    // req.body.monthly w ymken dir lih update
+    // atatus active
+
+    
+}
