@@ -5,6 +5,7 @@ const router = express.Router();
 const isAuth = require('./../middleware/isAuth');
 const userController = require('./../controllers/userController');
 const transactionController = require('./../controllers/transactionController');
+const categoryController = require('./../controllers/categoryController');
 
 router.get("/login", function (req, res) {
     return userController.renderLogin(req, res);
@@ -31,6 +32,10 @@ router.get("/home", function (req, res) {
 
 router.get("/transaction", /*isAuth,*/ function (req, res) {
     transactionController.renderTransaction(req, res);
+});
+
+router.get('/create-category', function(req, res){
+    categoryController.create(req, res);
 });
 
 module.exports = router;
