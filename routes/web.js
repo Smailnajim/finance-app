@@ -34,7 +34,7 @@ router.get("/transaction", /*isAuth,*/ function (req, res) {
     transactionController.renderTransaction(req, res);
 });
 
-router.get('/create-category', function(req, res){
+router.post('/create-category', function(req, res){
     categoryController.create(req, res);
 });
 
