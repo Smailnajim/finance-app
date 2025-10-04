@@ -24,5 +24,9 @@ exports.inserIntoBudge = async (req, res)=>{
     }catch(error){
         console.log('error->>>', error, '---<<<');
     }
-    
+}
+
+exports.insertIntoWallet = async (req, res) => {
+    req.locals.name = 'walet';
+    return await this.inserIntoBudge(req, res);
 }
