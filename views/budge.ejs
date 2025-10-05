@@ -41,7 +41,11 @@
         </form>
 
         <form action="insert" method="post">
-            <input type="number" name="mony" placeholder="send to wallet" required>
+            <% if (wallet) {%>
+            <p>budge in your wallet is : <%= wallet.rest %></p>
+            <% }%>
+            
+            <input type="number" name="mony" placeholder="add to wallet" required>
             <button type="submit">send</button>
         </form>
     </div>

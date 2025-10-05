@@ -4,10 +4,20 @@ const categoryController = require('./../controllers/categoryController');
 exports.renderBudge = async (req, res) => {
     try{
         const categories = await categoryController.getAll();
-        res.render('budge', {massage: res.locals.massage, categories, session: req.session});
+        const wallet = await models.Budge.findOne({
+            where: {
+                userId: 1
+            },
+            include: [{
+                model: models.Category,
+                as: 'category',
+                where: {name: 'wallet'}
+            }]
+        });
+        res.render('budge', {massage: res.locals.massage, categories, session: req.session, wallet});
         return;
     }catch(error){
-        console.log('---------<---error-->-----<--', error);
+        console.log('---------<----->-----<--', error);
     }
 }
 
@@ -18,8 +28,8 @@ exports.inserIntoBudge = async (req, res)=>{
 
     try{
         console.log('error->>>', req.body.mony, '---<<<');
-        let budge = await models.Budge.findOne({
-            where: {userId: 2},
+        const budge = await models.Budge.findOne({
+            where: {userId: 1},
             include: [{
                 model: models.Category,
                 as: 'category',
@@ -30,7 +40,7 @@ exports.inserIntoBudge = async (req, res)=>{
         });
         console.log(budge);
         if(!budge || !req.body.mony) console.log('++--\n', budge, '++--\n',);
-        budge.monthly = budge.monthly ? budge.monthly + parseFloat(req.body.mony) : parseFloat(req.body.mony);
+        budge.rest = budge.rest ? budge.rest + parseFloat(req.body.mony) : parseFloat(req.body.mony);
         await budge.save();
         return res.redirect('/budge');
     }catch(error){
