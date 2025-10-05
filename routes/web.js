@@ -43,4 +43,8 @@ router.get('/budge', function(req, res){
     budgeController.renderBudge(req, res);
 });
 
+router.post('/insert', function(req, res){
+    budgeController.insertIntoWallet(req, res);
+});
+
 module.exports = router;

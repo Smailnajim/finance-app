@@ -13,28 +13,33 @@ exports.renderBudge = async (req, res) => {
 
 exports.inserIntoBudge = async (req, res)=>{
     // req.session.user.id  bach nchof ga3 budge li 3ndo
-    // req.name bach nhded ina whda fihom 
+    // req.category name bach nhded ina whda fihom 
     // req.mony chal ghthet
 
     try{
-        const budge = await models.Budge.findOne({
-            where: {userId: 1},
+        console.log('error->>>', req.body.mony, '---<<<');
+        let budge = await models.Budge.findOne({
+            where: {userId: 2},
             include: [{
                 model: models.Category,
                 as: 'category',
-                where: {name: 'wallet'},
+                where: {name: res.locals.name},
                 attributes: []
-            }] 
+            }],
+            raw: false
         });
-        budge.monthly = budge.monthly ? budge.monthly + mony : mony;
-        return;
+        console.log(budge);
+        if(!budge || !req.body.mony) console.log('++--\n', budge, '++--\n',);
+        budge.monthly = budge.monthly ? budge.monthly + parseFloat(req.body.mony) : parseFloat(req.body.mony);
+        await budge.save();
+        return res.redirect('/budge');
     }catch(error){
         console.log('error->>>', error, '---<<<');
     }
 }
 
 exports.insertIntoWallet = async (req, res) => {
-    req.locals.name = 'walet';
+    res.locals.name = 'wallet';
     return await this.inserIntoBudge(req, res);
 }
 

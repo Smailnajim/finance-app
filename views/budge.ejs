@@ -39,6 +39,11 @@
                 <p style="color: red;"><%= massage %></p>
             <% } %>
         </form>
+
+        <form action="insert" method="post">
+            <input type="number" name="mony" placeholder="send to wallet" required>
+            <button type="submit">send</button>
+        </form>
     </div>
     <script src="js/budgeScript.js"></script>
 </body>

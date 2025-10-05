@@ -36,7 +36,7 @@ app.set('views', path.join(__dirname, 'views'));
 db.sequelize.authenticate()
 .then( () => {
   console.log('Connexion MySQL is good');
-  return db.sequelize.sync();
+  return db.sequelize.sync({alter: true});
 })
 .then(() => {
   console.log('==========================');
