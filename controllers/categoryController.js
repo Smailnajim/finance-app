@@ -9,10 +9,7 @@ exports.findByName = async (name) => {
             },
             attributes: ['name']
         });
-        if (category){
-            return false;//return 'allredy existe';
-        } 
-        return true;
+        return category;
     }catch(error){
         console.error('---------------categoryController---select---error--->', error, '***************');
     }
@@ -22,9 +19,11 @@ exports.create = async (req, res) => {
     try{
                 console.log('--creat-------<---req body-->-----<--', req.body.category);
         // req.body.name smite newCategory
-        const statu = await this.findByName(req.body.category);
-        if (statu) await models.Category.create({name: req.body.category});
-        return res.redirect('/budge');
+        let category = await this.findByName(req.body.category);
+        if (!category){
+            category = await models.Category.create({name: req.body.category});
+        }
+        return category;
     }catch(error){
         console.error('---------------categoryController---create---error--->', error, '***************');
     }
@@ -36,14 +35,4 @@ exports.getAll = async () => {
         attributes: ['name']
     });
     return all;
-}
-
-exports.renderBudge = async (req, res) => {
-    try{
-        const categories = await this.getAll();
-        res.render('budge', {categories, session: req.session});
-        return;
-    }catch(error){
-        console.log('---------<---error-->-----<--', error);
-    }
 }

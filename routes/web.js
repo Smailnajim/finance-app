@@ -6,6 +6,7 @@ const isAuth = require('./../middleware/isAuth');
 const userController = require('./../controllers/userController');
 const transactionController = require('./../controllers/transactionController');
 const categoryController = require('./../controllers/categoryController');
+const budgeController = require('./../controllers/budgeController');
 
 router.get("/login", function (req, res) {
     return userController.renderLogin(req, res);
@@ -34,12 +35,12 @@ router.get("/transaction", /*isAuth,*/ function (req, res) {
     transactionController.renderTransaction(req, res);
 });
 
-router.post('/create-category', function(req, res){
-    categoryController.create(req, res);
+router.post('/create-budge', function(req, res){
+    budgeController.create(req, res);
 });
 
 router.get('/budge', function(req, res){
-    categoryController.renderBudge(req, res);
+    budgeController.renderBudge(req, res);
 });
 
 module.exports = router;

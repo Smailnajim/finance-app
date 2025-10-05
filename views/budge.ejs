@@ -13,12 +13,12 @@
                 <li id="home" class="listItem"><a href="home">Home</a></li>
                 <% if(session.user){ %>
                     <li id="transaction" class="listItem"><a href="transaction">Transaction</a></li>
-                    <li id="budgetiation" class="listItem"><a href="budgetiation">Budgetiation</a></li>
+                    <li id="budgetiation" class="listItem"><a href="budge">Budgetiation</a></li>
                     <li id="visilisation" class="listItem"><a href="visilisation">Visilisation</a></li>
                     <li id="conect" class="listItem"><a href="logout">LOGOUT</a></li>
                 <% }else{ %>
                     <li id="transaction" class="listItem"><a href="transaction">Transaction</a></li>
-                    <li id="budgetiation" class="listItem"><a href="budgetiation">Budgetiation</a></li>
+                    <li id="budgetiation" class="listItem"><a href="budge">Budgetiation</a></li>
                     <li id="visilisation" class="listItem"><a href="visilisation">Visilisation</a></li>
                     <li id="conect" class="listItem"><a href="register">Conect</a></li>
                 <% } %>
@@ -27,7 +27,7 @@
     </header>
     
     <div class="continer">
-        <form action="create-category" method="post" class="category">
+        <form action="create-budge" method="post" class="category">
             <input type="text" name="category" placeholder="category" id="category" required>
             <select id="selectCategory">
                 <% categories.forEach((category)=>{%>
@@ -35,6 +35,9 @@
                 <% })%>
             </select>
             <button type="submit">Create Budge</button>
+            <% if(massage){ %>
+                <p style="color: red;"><%= massage %></p>
+            <% } %>
         </form>
     </div>
     <script src="js/budgeScript.js"></script>
