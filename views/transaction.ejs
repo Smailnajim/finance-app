@@ -23,7 +23,7 @@
 
     <div class="choseBudge">
         <div class="budge">Budge</div>
-        <select name="budge" id="selectBudge">
+        <select name="category" id="selectBudge">
             <% if(categories){ %>
                 <% categories.forEach((category)=>{ %>
                     <option value=<%= category.name %>><%= category.name %></option>
@@ -35,7 +35,7 @@
     <section id="addTransaction">
         <div class="top">
             <h3 class="item">ajout transaction</h3>
-            <div class="item" class="mony">0000</div>
+            <!-- <div class="item" class="mony"></div> -->
         </div>
 
         <form action="" method="post" class="detai">
@@ -51,9 +51,11 @@
                 </li>
             </ul>
             <select name="transactionTo" class="column" id="transactionTo">
-                <option value="non">non</option>
-                <option value="walet">walet</option>
-                <option value="ff">ff</option>
+                <% if(categories){ %>
+                    <% categories.forEach((category)=>{ %>
+                        <option value=<%= category.name %>><%= category.name %></option>
+                    <% }); %>
+                <% } %>
             </select>
         </form>
     </section>
