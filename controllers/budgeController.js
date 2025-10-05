@@ -61,10 +61,10 @@ exports.create = async (req, res) => {
 
     try{
         const category = await categoryController.create(req, res);
-        console.log('////////////////////******', req.body.category);
+        console.log('////////////////////******\n', category.id);
         
         let budge = await models.Budge.findOne({
-            where : {userId: 5},
+            where : {userId: 1},
             include: [{
                 model: models.Category,
                 as: 'category',
@@ -84,7 +84,7 @@ exports.create = async (req, res) => {
         console.log('////////////////////******');
 
         budge = await models.Budge.create({
-            userId: 5,
+            userId: 1,
             categoryId: category.id,
             status: 'active',
         });

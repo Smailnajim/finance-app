@@ -24,8 +24,11 @@
     <div class="choseBudge">
         <div class="budge">Budge</div>
         <select name="budge" id="selectBudge">
-            <option value="wallet">wallet</option>
-            <option value="ff">ff</option>
+            <% if(categories){ %>
+                <% categories.forEach((category)=>{ %>
+                    <option value=<%= category.name %>><%= category.name %></option>
+                <% }); %>
+            <% } %>
         </select>
     </div>
 
@@ -65,6 +68,6 @@
             <li class="transactionItem">5555555555555555555555555</li>
         </ul>
     </section>
-
+    <script src="js/transaction.js"></script>
 </body>
 </html>

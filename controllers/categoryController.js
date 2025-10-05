@@ -7,7 +7,7 @@ exports.findByName = async (name) => {
             where: {
                 name: name
             },
-            attributes: ['name']
+            attributes: ['id', 'name']
         });
         return category;
     }catch(error){
